@@ -66,7 +66,7 @@ devices_per_rank=8
 voltage=3.3
 ```
 
-###Ερώτημα 3
+### Ερώτημα 3
 
 
 The **BaseSimpleCPU** serves several purposes: 
@@ -84,4 +84,25 @@ The **AtomicSimpleCPU** is the version of **SimpleCPU** that uses atomic memory 
 **MinorCPU** is an in-order processor model with a fixed pipeline but configurable data structures and execute behaviour. It is intended to be used to model processors with strict in-order execution behaviour and allows visualisation of an instruction's position in the pipeline through the MinorTrace/minorview.py format/tool. The intention is to provide a framework for micro-architecturally correlating the model with a particular, chosen processor with similar capabilities.
 
 
-a) Γράφουμε ένα απλό πρόγραμμα σε γλώσσα C και στη συνέχεια το κάνουμε compile με τον gem5 στο terminal . 
+a) Γράφουμε ένα απλό πρόγραμμα σε γλώσσα **C** και στη συνέχεια το κάνουμε compile με τον gem5 στο terminal . Στο συγκεκριμένο πρόγραμμα εμφανίζεται το πλήθος των περιττών αριθμών σε μία σειρά Fibonacci :
+
+```
+#include<stdio.h>
+
+int fib[20005]={0,1,1};
+
+int main()
+{
+	for (int i=2; i<20000; i++)
+		fib[i] = fib[i-1]+fib[i-2];
+	int odd=0;
+	for (int i=0; i<20005; i++)
+		if (fib[i]%2==1) odd++;
+
+	printf("Odd numbers : %d ", odd);
+	return 0;
+}
+```
+
+
+		
