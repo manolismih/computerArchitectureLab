@@ -1,4 +1,4 @@
-# computerArchitectureLab
+﻿# computerArchitectureLab
 _Reports from the lab assignments, for the Computer Architecure course, school of Electrical and Computer Enginneering, AUTH_
 ## Εργαστήριο 1: Εξοικείωση με τον προσομοιωτή gem5
 _Η εργασία αυτή ζητάει την εγκατατάσταση του προσομειωτή **gem5**, την συλλογή πληροφοριών από την εκτέλεση του παραδείγματος **starter_se** και ενός δικού μας απλού προγράμματος γραμμένο σε C._
@@ -79,6 +79,9 @@ The **AtomicSimpleCPU** is the version of **SimpleCPU** that uses atomic memory 
 Τhe **InOrder CPU** model was designed to provide a generic framework to simulate in-order pipelines with an arbitrary ISA and with arbitrary pipeline descriptions. The model was originally conceived by closely mirroring the O3CPU model to provide a simulation framework that would operate at the "Tick" granularity. We then abstract the individual stages in the O3 model to provide generic pipeline stages for the **InOrder CPU** to leverage in creating a user-defined amount of pipeline stages. Additionally, we abstract each component that a CPU might need to access (ALU, Branch Predictor, etc.) into a "resource" that needs to be requested by each instruction according to the resource-request model we implemented. This will potentially allow for researchers to model custom pipelines without the cost of designing the complete CPU from scratch. 
 
 **MinorCPU** is an in-order processor model with a fixed pipeline but configurable data structures and execute behaviour. It is intended to be used to model processors with strict in-order execution behaviour and allows visualisation of an instruction's position in the pipeline through the MinorTrace/minorview.py format/tool. The intention is to provide a framework for micro-architecturally correlating the model with a particular, chosen processor with similar capabilities.
+
+
+
 #### 3a
 Γράφουμε ένα απλό πρόγραμμα σε γλώσσα **C** και στη συνέχεια το κάνουμε compile για ARM επεξεργαστή. Στο συγκεκριμένο πρόγραμμα εμφανίζεται το πλήθος των περιττών αριθμών σε μία σειρά Fibonacci:
 ```c
@@ -97,26 +100,34 @@ int main()
 	printf("Odd numbers : %d ", odd);
 	return 0;
 }
-```
-Αντιγράφουμε το εκτελέσιμο στον ίδιο φάκελο που βρίσκεται και το πρόγραμμα `hello` των ερωτημάτων 1 και 2. Τρέχουμε τις εξής εντολές στην γραμμή εντολών:
+
+Κάνουμε compile το προγραμμα με την εντολή :
 ```sh
-[1]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=TimingSimpleCPU --caches -c tests/test-progs/hello/bin/arm/linux/my_prog_arm
-[2]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=MinorCPU --caches -c tests/test-progs/hello/bin/arm/linux/my_prog_arm 
+arm-linux-gnueabihf-gcc --static my_prog.c -o my_prog_arm
 ```
+
+Εφόσον έχει γίνει το compile για ARM επεξεργαστή, πηγαίνουμε στο directory του gem5 και εκτελούμε τις παρακάτω εντολές:
+```sh
+[1]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=TimingSimpleCPU --caches -c lab1/my_prog_arm
+[2]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=MinorCPU --caches -c lab1/my_prog_arm 
+```
+Μετά από την εκτέλεση της κάθε εντολής ανοίγουμε το αρχείο `stats.txt` που βρίσκεται στο directory <gem5_dir>/m5out και παρατηρούμε τους χρόνους εκτέλεσης για τα διαφορετικά μοντέλα CPU.
+
 Τα αντίστοιχα πεδία `final_tick` δίνονται παρακάτω:
 ```
 [1] 1424379000
 [2] 598081000
 ```
 #### 3b
-Συγκρίνοντας τα παραπάνω παρατηρούμε μια επιτάχυνση κοντά στο 4 για το μοντέλο MinorCPU. Αυτή ο οφείλεται στο γεγονός ότι το μοντέλο MinorCpu περιλαμβάνει διοχέτευση (pipeline) ενώ το TimingSimpleCPU όχι.
+Συγκρίνοντας τα παραπάνω παρατηρούμε μια επιτάχυνση κοντά στο 4 για το μοντέλο MinorCPU. Αυτή οφείλεται στο γεγονός ότι το μοντέλο MinorCpu περιλαμβάνει 4 στάδια διοχέτευσης (pipeline), ενώ το TimingSimpleCPU δεν υποστηρίζει διοχέτευση.
+
 #### 3c
-Χρησιμοποιούμε τις εξής εντολές για να εξάζουμε τα αρχεία stats.txt και να συγκρίνουμε την κάθε περίπτωση:
+Χρησιμοποιούμε τις εξής εντολές για να εξετάσουμε τα αρχεία stats.txt και να συγκρίνουμε την κάθε περίπτωση:
 ```sh
-[3]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=TimingSimpleCPU --cpu-clock=500MHz --caches -c tests/test-progs/hello/bin/arm/linux/my_prog_arm 
-[4]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=MinorCPU --cpu-clock=500MHz --caches -c tests/test-progs/hello/bin/arm/linux/my_prog_arm 
-[5]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=MinorCPU --mem-type=SimpleMemory --caches -c tests/test-progs/hello/bin/arm/linux/my_prog_arm 
-[6]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=TimingSimpleCPU --mem-type=SimpleMemory --caches -c tests/test-progs/hello/bin/arm/linux/my_prog_arm 
+[3]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=TimingSimpleCPU --cpu-clock=500MHz --caches -c lab1/my_prog_arm 
+[4]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=MinorCPU --cpu-clock=500MHz --caches -c lab1/my_prog_arm
+[5]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=MinorCPU --mem-type=SimpleMemory --caches -c lab1/my_prog_arm 
+[6]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=TimingSimpleCPU --mem-type=SimpleMemory --caches -c lab1/my_prog_arm 
 ```
 Στη συνέχεια παραθέτονται οι τιμές `final_tick` από τα αντίστοιχα αρχεία stats.txt που προκύπτον:
 ```
@@ -130,3 +141,13 @@ int main()
 Προκύπτουν τα εξής συμπεράσματα:
 * Με αλλαγή της συχνότητας λειτουργίας του επεξεργαστή από 2GHz(default) σε 500MHz (περιπτώσεις [1]vs[3] και [2]vs[4]) το πρόγραμμα γίνεται περίπου 4 φορές πιο αργό.
 * Με αλλαγή του τύπου μνήμης από Dramctrl(default) σε SimpleMemory (περιπτώσεις [1]vs[6] και [2]vs[5]) δεν παρατηρούμε σημαντικές διαφορές.
+
+
+
+_ Πηγές _
+[Φυλλάδιο Εργαστηρίου 1](https://elearning.auth.gr/pluginfile.php/1286384/mod_resource/content/1/architecture_lab1.pdf)
+[CPU models for GEM5](http://gem5.org/CPU_Models)
+[Intro to GEM5](https://elearning.auth.gr/pluginfile.php/1278999/mod_resource/content/1/gem5_presentation_075.pdf)
+
+**Κριτική Εργασίας**
+Η εργασία του 1ου εργαστηρίου ήταν σχετικά απλή και με κατανοητές οδηγίες . Οι δυσκολίες που συναντήσουμε ήταν περισσότερο πάνω στην εγκατάσταση του GEM5 και στην σωστή σύνταξη των εντολών για την προσωμοίωση του προγράμματος . Για την εγκατάσταση θα βοηθούσε περισσότερο αν υπήρχαν μερικά tips ως προς τα “εμπόδια” που μπορείς να συναντήσεις, ενώ για την σωστή σύνταξη των εντολών θα μπορούσαμε να είχαμε περισσότερες πληροφορίες ως προς τις αλλαγές των παραμέτρων του προσομοιωτή (Cpu type, CPU clock κλπ).
