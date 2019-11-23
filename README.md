@@ -41,6 +41,11 @@ Global frequency set at 1000000000000 ticks per second
                         help="Specify the physical memory size")
 ```
 ### Ερώτημα 2: 
+Στο αρχείο `stats.txt` βρίσκουμε την πληροφορία:
+```ini
+system.cpu_cluster.clk_domain.clock 250 # Clock period in ticks
+```
+Εφόσον ο gem5 αντιστοιχίζει ticks με pS, η παραπάνω τιμή δηλώνει την συχνότητα 4GHz.
 Τα αρχεία `config.ini` και `config.json` περιέχουν τις ίδιες πληροφορίες με διαφορετική μορφή. Στο `config.ini`, στο πεδίο `[system]` μπορούμε να επαληθεύσουμε κατευθείαν ότι:
 ```ini
 cache_line_size=64
@@ -49,9 +54,6 @@ memories=system.mem_ctrls0 system.mem_ctrls1
 ```
 Ακολουθούμε τα πεδία που μας ενδιαφέρουν για να εξάγουμε τις πληροφορίες που ψάχνουμε:
 ```ini
-[system.clk_domain]
-clock=1000
-#...
 [system.cpu_cluster.cpus]
 type=MinorCPU
 numThreads=1
@@ -96,6 +98,34 @@ int main()
 	return 0;
 }
 ```
-
-
-		
+Αντιγράφουμε το εκτελέσιμο στον ίδιο φάκελο που βρίσκεται και το πρόγραμμα `hello` των ερωτημάτων 1 και 2. Τρέχουμε τις εξής εντολές στην γραμμή εντολών:
+```sh
+[1]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=TimingSimpleCPU --caches -c tests/test-progs/hello/bin/arm/linux/my_prog_arm
+[2]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=MinorCPU --caches -c tests/test-progs/hello/bin/arm/linux/my_prog_arm 
+```
+Τα αντίστοιχα πεδία `final_tick` δίνονται παρακάτω:
+```
+[1] 1424379000
+[2] 598081000
+```
+Συγκρίνοντας τα παραπάνω παρατηρούμε μια επιτάχυνση κοντά στο 4 για το μοντέλο MinorCPU. Αυτή ο οφείλεται στο γεγονός ότι το μοντέλο MinorCpu περιλαμβάνει διοχέτευση (pipeline) ενώ το TimingSimpleCPU όχι.
+#### 3c
+Χρησιμοποιούμε τις εξής εντολές για να εξάζουμε τα αρχεία stats.txt και να συγκρίνουμε την κάθε περίπτωση:
+```sh
+[3]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=TimingSimpleCPU --cpu-clock=500MHz --caches -c tests/test-progs/hello/bin/arm/linux/my_prog_arm 
+[4]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=MinorCPU --cpu-clock=500MHz --caches -c tests/test-progs/hello/bin/arm/linux/my_prog_arm 
+[5]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=MinorCPU --mem-type=SimpleMemory --caches -c tests/test-progs/hello/bin/arm/linux/my_prog_arm 
+[6]$ ./build/ARM/gem5.opt configs/example/se.py --cpu-type=TimingSimpleCPU --mem-type=SimpleMemory --caches -c tests/test-progs/hello/bin/arm/linux/my_prog_arm 
+```
+Στη συνέχεια παραθέτονται οι τιμές `final_tick` από τα αντίστοιχα αρχεία stats.txt που προκύπτον:
+```
+[1] 1424379000
+[2] 598081000
+[3] 5300204000
+[4] 2027810000
+[5] 567077000
+[6] 1386484000
+```
+Προκύπτουν τα εξής συμπεράσματα:
+* Με αλλαγή της συχνότητας λειτουργίας του επεξεργαστή από 2GHz(default) σε 500MHz (περιπτώσεις [1]vs[3] και [2]vs[4]) το πρόγραμμα γίνεται περίπου 4 φορές πιο αργό.
+* Με αλλαγή του τύπου μνήμης από Dramctrl(default) σε SimpleMemory (περιπτώσεις [1]vs[6] και [2]vs[5]) δεν παρατηρούμε σημαντικές διαφορές.
