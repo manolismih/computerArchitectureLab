@@ -1,4 +1,4 @@
-﻿# computerArchitectureLab
+# computerArchitectureLab
 _Reports from the lab assignments, for the Computer Architecure course, school of Electrical and Computer Enginneering, AUTH_
 ## Εργαστήριο 1: Εξοικείωση με τον προσομοιωτή gem5
 _Η εργασία αυτή ζητάει την εγκατατάσταση του προσομειωτή **gem5**, την συλλογή πληροφοριών από την εκτέλεση του παραδείγματος **starter_se** και ενός δικού μας απλού προγράμματος γραμμένο σε C._
@@ -47,7 +47,6 @@ cache_line_size=64
 mem_ranges=0:2147483647
 memories=system.mem_ctrls0 system.mem_ctrls1
 ```
-
 Ακολουθούμε τα πεδία που μας ενδιαφέρουν για να εξάγουμε τις πληροφορίες που ψάχνουμε:
 ```ini
 [system.clk_domain]
@@ -65,28 +64,22 @@ devices_per_rank=8
 [system.voltage_domain]
 voltage=3.3
 ```
-
-### Ερώτημα 3
-
-
+### Ερώτημα 3:
 The **BaseSimpleCPU** serves several purposes: 
-    • Holds architected state, stats common across the **SimpleCPU** models. 
-    • Defines functions for checking for interrupts, setting up a fetch request, handling pre-execute setup, handling post-execute actions, and advancing the PC to the next instruction. These functions are also common across the **SimpleCPU** models. 
-    • Implements the ExecContext interface.
+* Holds architected state stats common across the **SimpleCPU** models. 
+* Defines functions for checking for interrupts, setting up a fetch request, handling pre-execute setup, handling post-execute actions, and advancing the PC to the next instruction. These functions are also common across the **SimpleCPU** models. 
+* Implements the ExecContext interface.
 
-The **AtomicSimpleCPU** is the version of **SimpleCPU** that uses atomic memory accesses . It uses the latency estimates from the atomic accesses to estimate overall cache access time. The **AtomicSimpleCPU** is derived from **BaseSimpleCPU**, and implements functions to read and write memory, and also to tick, which defines what happens every CPU cycle. It defines the port that is used to hook up to memory, and connects the CPU to the cache. 
-
+The **AtomicSimpleCPU** is the version of **SimpleCPU** that uses atomic memory accesses. It uses the latency estimates from the atomic accesses to estimate overall cache access time. The **AtomicSimpleCPU** is derived from **BaseSimpleCPU**, and implements functions to read and write memory and also to tick, which defines what happens every CPU cycle. It defines the port that is used to hook up to memory, and connects the CPU to the cache. 
 
 Τhe **TimingSimpleCPU** is the version of **SimpleCPU** that uses timing memory accesses. It stalls on cache accesses and waits for the memory system to respond prior to proceeding. Like the **AtomicSimpleCPU**, the **TimingSimpleCPU** is also derived from **BaseSimpleCPU**, and implements the same set of functions. It defines the port that is used to hook up to memory, and connects the CPU to the cache. It also defines the necessary functions for handling the response from memory to the accesses sent out. 
 
 Τhe **InOrder CPU** model was designed to provide a generic framework to simulate in-order pipelines with an arbitrary ISA and with arbitrary pipeline descriptions. The model was originally conceived by closely mirroring the O3CPU model to provide a simulation framework that would operate at the "Tick" granularity. We then abstract the individual stages in the O3 model to provide generic pipeline stages for the **InOrder CPU** to leverage in creating a user-defined amount of pipeline stages. Additionally, we abstract each component that a CPU might need to access (ALU, Branch Predictor, etc.) into a "resource" that needs to be requested by each instruction according to the resource-request model we implemented. This will potentially allow for researchers to model custom pipelines without the cost of designing the complete CPU from scratch. 
 
 **MinorCPU** is an in-order processor model with a fixed pipeline but configurable data structures and execute behaviour. It is intended to be used to model processors with strict in-order execution behaviour and allows visualisation of an instruction's position in the pipeline through the MinorTrace/minorview.py format/tool. The intention is to provide a framework for micro-architecturally correlating the model with a particular, chosen processor with similar capabilities.
-
-
-a) Γράφουμε ένα απλό πρόγραμμα σε γλώσσα **C** και στη συνέχεια το κάνουμε compile με τον gem5 στο terminal . Στο συγκεκριμένο πρόγραμμα εμφανίζεται το πλήθος των περιττών αριθμών σε μία σειρά Fibonacci :
-
-```
+#### 3a
+Γράφουμε ένα απλό πρόγραμμα σε γλώσσα **C** και στη συνέχεια το κάνουμε compile για ARM επεξεργαστή. Στο συγκεκριμένο πρόγραμμα εμφανίζεται το πλήθος των περιττών αριθμών σε μία σειρά Fibonacci:
+```c
 #include<stdio.h>
 
 int fib[20005]={0,1,1};
@@ -96,7 +89,7 @@ int main()
 	for (int i=2; i<20000; i++)
 		fib[i] = fib[i-1]+fib[i-2];
 	int odd=0;
-	for (int i=0; i<20005; i++)
+	for (int i=0; i<20000; i++)
 		if (fib[i]%2==1) odd++;
 
 	printf("Odd numbers : %d ", odd);
