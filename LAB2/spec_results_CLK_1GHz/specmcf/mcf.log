@@ -1,0 +1,17 @@
+gem5 Simulator System.  http://gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 compiled Nov 13 2019 01:47:03
+gem5 started Dec  1 2019 18:55:00
+gem5 executing on manolismi-pc, pid 6540
+command line: ./build/ARM/gem5.opt -d spec_results/specmcf configs/example/se.py --cpu-clock=1GHz --cpu-type=MinorCPU --caches --l2cache -c spec_cpu2006/429.mcf/src/specmcf -o spec_cpu2006/429.mcf/data/inp.in -I 100000000
+
+Global frequency set at 1000000000000 ticks per second
+**** REAL SIMULATION ****
+
+MCF SPEC CPU2006 version 1.10
+Copyright (c) 1998-2000 Zuse Institut Berlin (ZIB)
+Copyright (c) 2000-2002 Andreas Loebel & ZIB
+Copyright (c) 2003-2005 Andreas Loebel
+
+Exiting @ tick 127942201000 because a thread reached the max instruction count

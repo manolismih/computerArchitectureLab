@@ -1,0 +1,15 @@
+gem5 Simulator System.  http://gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 compiled Nov 13 2019 01:47:03
+gem5 started Dec  1 2019 19:59:03
+gem5 executing on manolismi-pc, pid 7709
+command line: ./build/ARM/gem5.opt -d spec_results/specsjeng configs/example/se.py --cpu-clock=1GHz --cpu-type=MinorCPU --caches --l2cache -c spec_cpu2006/458.sjeng/src/specsjeng -o spec_cpu2006/458.sjeng/data/test.txt -I 100000000
+
+Global frequency set at 1000000000000 ticks per second
+**** REAL SIMULATION ****
+
+Sjeng version SPEC 1.0, Copyright (C) 2000-2005 Gian-Carlo Pascutto
+
+SPEC Workload
+Exiting @ tick 704056068000 because a thread reached the max instruction count

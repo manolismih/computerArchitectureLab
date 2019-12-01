@@ -1,0 +1,19 @@
+gem5 Simulator System.  http://gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 compiled Nov 13 2019 01:47:03
+gem5 started Dec  1 2019 21:09:52
+gem5 executing on manolismi-pc, pid 8803
+command line: ./build/ARM/gem5.opt -d spec_results/speclibm configs/example/se.py --cpu-clock=1GHz --cpu-type=MinorCPU --caches --l2cache -c spec_cpu2006/470.lbm/src/speclibm -o '20 spec_cpu2006/470.lbm/data/lbm.in 0 1 spec_cpu2006/470.lbm/data/100_100_130_cf_a.of' -I 100000000
+
+Global frequency set at 1000000000000 ticks per second
+**** REAL SIMULATION ****
+MAIN_printInfo:
+	grid size      : 100 x 100 x 130 = 1.30 * 10^6 Cells
+	nTimeSteps     : 20
+	result file    : spec_cpu2006/470.lbm/data/lbm.in
+	action         : nothing
+	simulation type: channel flow
+	obstacle file  : spec_cpu2006/470.lbm/data/100_100_130_cf_a.of
+
+Exiting @ tick 262326510000 because a thread reached the max instruction count

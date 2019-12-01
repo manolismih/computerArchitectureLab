@@ -1,0 +1,24 @@
+gem5 Simulator System.  http://gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 compiled Nov 13 2019 01:47:03
+gem5 started Dec  1 2019 19:27:07
+gem5 executing on manolismi-pc, pid 7128
+command line: ./build/ARM/gem5.opt -d spec_results/spechmmer configs/example/se.py --cpu-clock=1GHz --cpu-type=MinorCPU --caches --l2cache -c spec_cpu2006/456.hmmer/src/spechmmer -o '--fixed 0 --mean 325 --num 45000 --sd 200 --seed 0 spec_cpu2006/456.hmmer/data/bombesin.hmm' -I 100000000
+
+Global frequency set at 1000000000000 ticks per second
+**** REAL SIMULATION ****
+hmmcalibrate -- calibrate HMM search statistics
+HMMER 2.3 (May 2003)
+Copyright (C) 1992-2003 HHMI/Washington University School of Medicine
+Freely distributed under the GNU General Public License (GPL)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+HMM file:                 spec_cpu2006/456.hmmer/data/bombesin.hmm
+Length distribution mean: 325
+Length distribution s.d.: 200
+Number of samples:        45000
+random seed:              0
+histogram(s) saved to:    [not saved]
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Exiting @ tick 118530387000 because a thread reached the max instruction count

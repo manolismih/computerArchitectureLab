@@ -1,0 +1,16 @@
+gem5 Simulator System.  http://gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 compiled Nov 13 2019 01:47:03
+gem5 started Dec  1 2019 18:21:01
+gem5 executing on manolismi-pc, pid 6228
+command line: ./build/ARM/gem5.opt -d spec_results/specbzip configs/example/se.py --cpu-clock=1GHz --cpu-type=MinorCPU --caches --l2cache -c spec_cpu2006/401.bzip2/src/specbzip -o 'spec_cpu2006/401.bzip2/data/input.program 10' -I 100000000
+
+Global frequency set at 1000000000000 ticks per second
+**** REAL SIMULATION ****
+spec_init
+Loading Input Data
+Duplicating 2415144 bytes
+Input data 10485760 bytes in length
+Compressing Input Data, level 5
+Exiting @ tick 161024705000 because a thread reached the max instruction count
