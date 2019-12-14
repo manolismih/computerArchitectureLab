@@ -9,8 +9,8 @@ _Reports from the lab assignments, for the Computer Architecure course, school o
 
 CLOCK = 1 GHz
 
-| Benchmarks | L1 instruction | L1 icache | L1 dcache   | L2 system cache | L2 dcache | associativity L1 / L2 | cache line |
-|------------|----------------|-----------|-------------|-----------------|-----------|-----------------------|------------|
+| Benchmarks | L1 instruction | L1 icache | L1 dcache   | L2 system cache | associativity L1 / L2 | cache line |
+|------------|----------------|-----------|-------------|-----------------|-----------------------|------------|
 | 401.bzip2  | 42752 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
 | 429.mcf    | 32768 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
 | 456.hmmer  | 82816 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
@@ -33,8 +33,8 @@ CLOCK = 1 GHz
 
 CLOCK = 2 GHz
 
-| Benchmarks | L1 instruction | L1 icache | L1 dcache   | L2 system cache | L2 dcache | associativity L1 / L2 | cache line |
-|------------|----------------|-----------|-------------|-----------------|-----------|-----------------------|------------|
+| Benchmarks | L1 instruction | L1 icache | L1 dcache   | L2 system cache | associativity L1 / L2 | cache line |
+|------------|----------------|-----------|-------------|-----------------|-----------------------|------------|
 | 401.bzip2  | 42688 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
 | 429.mcf    | 32384 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
 | 456.hmmer  | 84288 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
