@@ -7,6 +7,10 @@ _Reports from the lab assignments, for the Computer Architecure course, school o
 
 #### Ερώτημα 1
 
+Παίρνουμε τα εξής στοιχεία από τα output files του GEM5 :
+`system.mem_ctrls.bytes_inst_read::.cpu.inst` από το `stats.txt` 
+`[system.cpu.icache] : size & assoc`, `[system.cpu.dcache] : size & assoc` , `[system.l2] : size & assoc` , `[system] : cache_line_size ` από το `config.ini`  
+
 CLOCK = 1 GHz
 
 | Benchmarks | L1 instruction | L1 icache | L1 dcache   | L2 system cache | associativity L1 / L2 | cache line |
@@ -18,6 +22,8 @@ CLOCK = 1 GHz
 | 470.lbm    | 31360 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
 
 #### Ερώτημα 2
+
+Από τα output file `stats.txt` παίρνουμε τις εξής παραμέτρους:  `sim_seconds` , `system.cpu.cpi` , `system.cpu.icache.overall_miss_rate::total` , `system.cpu.dcache.overall_miss_rate::total` & `system.l2.overall_miss_rate::total`.
 
 | Benchmarks | Execution Time | CPI | Total miss rates: Icache / Dcache | Total miss rates: L2 cache |
 |------------|----------------|-----|-----------------------------------|----------------------------|
