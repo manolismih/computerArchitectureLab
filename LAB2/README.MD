@@ -7,19 +7,15 @@ _Reports from the lab assignments, for the Computer Architecure course, school o
 
 #### Ερώτημα 1
 
-Παίρνουμε τα εξής στοιχεία από τα output files του GEM5 :
-`system.mem_ctrls.bytes_inst_read::.cpu.inst` από το `stats.txt` 
+Παίρνουμε τα εξής στοιχεία από τα output files του GEM5 : 
 `[system.cpu.icache] : size & assoc`, `[system.cpu.dcache] : size & assoc` , `[system.l2] : size & assoc` , `[system] : cache_line_size ` από το `config.ini`  
 
 CLOCK = 1 GHz
 
-| Benchmarks | L1 instruction | L1 icache | L1 dcache   | L2 system cache | associativity L1 / L2 | cache line |
-|------------|----------------|-----------|-------------|-----------------|-----------------------|------------|
-| 401.bzip2  | 42752 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
-| 429.mcf    | 32768 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
-| 456.hmmer  | 82816 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
-| 458.sjeng  | 37632 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
-| 470.lbm    | 31360 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
+| L1 icache | L1 dcache   | L2 system cache | associativity L1I / L1D / L2 | cache line |
+|-----------|-------------|-----------------|------------------------------|------------|
+| 32768 | 65536 | 2097152 | 2 / 2 / 8 | 64 |
+
 
 #### Ερώτημα 2
 
@@ -39,13 +35,13 @@ CLOCK = 1 GHz
 
 CLOCK = 2 GHz
 
-| Benchmarks | L1 instruction | L1 icache | L1 dcache   | L2 system cache | associativity L1 / L2 | cache line |
-|------------|----------------|-----------|-------------|-----------------|-----------------------|------------|
-| 401.bzip2  | 42688 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
-| 429.mcf    | 32384 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
-| 456.hmmer  | 84288 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
-| 458.sjeng  | 36864 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
-| 470.lbm    | 31552 | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
+| Benchmarks | L1 icache | L1 dcache   | L2 system cache | associativity L1I / L1D / L2 | cache line |
+|------------|-----------|-------------|-----------------|------------------------------|------------|
+| 401.bzip2  | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
+| 429.mcf    | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
+| 456.hmmer  | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
+| 458.sjeng  | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
+| 470.lbm    | 32768 | 65536 | 2097152 | 2 / 8 | 64 |
 
 
 
@@ -117,3 +113,25 @@ CLOCK = 2 GHz
 * L1 Instruction cache size: 32KB
 * L2 cache associativity: 1 
 * L2 cache size: 4ΜΒ
+
+
+### Βήμα 3
+
+'Εχοντας εικόνα απο τα γραφήματα από το `Βήμα 2`, παρατηρούμε ότι υπάρχει σημαντική ελάττωση στο CPI από την αλλαγή στο `Cache line` , ενώ οι παράμετροι αποδίδουν λιγότερο με την αύξηση τους ειναι τα `L1 icache associativity` , `L1 icache size` `L2 cache associativity` . Μπορούμε να πούμε ότι με την αύξηση των `Cache line` και associativity παραμέτρων , αυξάνεται και η πολυπλοκότητα του συστήματος καθώς αυξάνεται και ο αριθμός των πολυπλεκτών και των συνδέσεων. Οπότε από τη πλευρα κόστους γι' αυτές τις παραμέτρους μπορούμε να τα κοστολογίσουμε ως: cache_line_size * (2* L1_dcache_assoc + L1_icache_assoc + L2_cache_assoc ) .
+Θεωρούμε διπλάσιο το κόστος της L1_dcache_assoc από το γεγονός ότι αυτή η παράμετρος απο τα γραφήματα φαίνεται να αποδίδει περισσότερο σε σχέση με τις άλλες παραμέτρους .
+
+Όσον αφορά τα data caches , γνωρίζουμε ότι τα `L1 data caches` είναι "ακριβότερα" απο τα `L2 data caches` αλλά γρηγορότερα , έχουν όμως 8 φορές λιγότερη μνήμη συνολικά. Με μία εκτίμηση μέσα απο τις βιβλιογραφίες που ψάξαμε θα λέγαμε ότι τα μεγέθη των caches κοστολογούνται ως : 2 * (L1_icache_size + L1_dcache_size ) + L2_cache_size .
+
+Οπότε για το συνολικό κόστος ορίζουμε τη συνάρτηση κόστους : 
+```
+Κ = cache_line_size * (2* L1_dcache_assoc + L1_icache_assoc + L2_cache_assoc ) + 2 * (L1_icache_size + L1_dcache_size ) + L2_cache_size 
+```
+Άρα για κάθε benchmark έχουμε : 
+
+| Benchmarks | Cost |
+|------------|------|
+| 401.bzip2  | 
+| 429.mcf    | 
+| 456.hmmer  |
+| 458.sjeng  | 
+| 470.lbm    | 
