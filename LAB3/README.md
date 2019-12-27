@@ -1,6 +1,8 @@
 # computerArchitectureLab
 _Reports from the lab assignments, for the Computer Architecure course, school of Electrical and Computer Enginneering, AUTH_
 
+#### Παρατήρηση: Τα scripts που χρησιμοποιήθηκαν για την συλλογή και την ανάλυση των δεδομένων του 2ου και 3ου εργαστηρίου βρίσκονται στον φάκελο [spec_results_scripts_tools](https://github.com/manolismih/computerArchitectureLab/tree/master/spec_results_scripts_tools)
+
 ## Εργαστήριο 3: Energy-Delay-Area Product Optimization (gem5 + McPAT)
 
 ### Βήμα 1
