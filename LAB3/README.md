@@ -104,3 +104,9 @@ Runtime Dynamic = 2.96053 W
 
 #### Κριτική Εργασίας
 Σε αυτήν την εργασία μάθαμε αρκετά πράγματα αντλώντας πληροφορίες μέσα από τις προσομοιώσεις με τη βοήθεια του McPat και από τη βιβλιογραφία. Δεν δυσκολευτήκαμε ιδιαίτερα , παρά μόνο στην παραγωγή του γινομένου (EDAP_product) μέσα απο το script, καθώς έπρεπε να εντοπίσουμε τις κατάλληλες μεταβλητές . Με την ολοκλήρωση των εργαστηριακών ασκήσεων , πήραμε αρκέτες και βασικές γνώσεις για την Αρχιτεκτονική των Υπολογιστών , την κατασκευή επεξεργαστή με βάση τη καλύτερη απόδοση και χαμηλότερου κόστους , μία καλη και ενδιαφέρουσα αρχή γενικά για την ενοσχόληση πάνω σ' αυτό το αντικείμενο.
+
+Πηγές : 
+[McPAT 1.0: An Integrated Power, Area, and Timing Modeling Framework forMulticore Architectures](McPAT 1.0: An Integrated Power, Area, and Timing Modeling Framework forMulticore Architectures)
+[McPAT: An Integrated Power, Area, and Timing ModelingFramework for Multicore and Manycore Architectures](https://www.hpl.hp.com/research/mcpat/micro09.pdf?fbclid=IwAR2UIIsvFdRrUTNw7DuDn-6zD_A_W40Hy1MN2E-AT1DvfqVuKvCiqdFxzAI)
+[Power Model ESESC Tutorial](https://masc.soe.ucsc.edu/esesc/resources/5-powermodel.pdf?fbclid=IwAR0FxNqQw4K0_AII7bT5CMoL3nSVEWyFaqSQxF_dY5EEJtthX-CZERYopzs)
+[Wattch, Hotspot, Hotleakage, McPAT](http://docencia.ac.upc.edu/master/MIRI/NCD/docs/06-Wattch-Hotspot-Hotleakage.pdf?fbclid=IwAR0sZ95NqtM70XiyJ_Dh7c_sssuCvl6wEav3s2ztjBS986NUtEUWTDQIA7s)
