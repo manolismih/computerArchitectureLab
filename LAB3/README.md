@@ -106,7 +106,8 @@ Runtime Dynamic = 2.96053 W
 Σε αυτήν την εργασία μάθαμε αρκετά πράγματα αντλώντας πληροφορίες μέσα από τις προσομοιώσεις με τη βοήθεια του McPat και από τη βιβλιογραφία. Δεν δυσκολευτήκαμε ιδιαίτερα , παρά μόνο στην παραγωγή του γινομένου (EDAP_product) μέσα απο το script, καθώς έπρεπε να εντοπίσουμε τις κατάλληλες μεταβλητές . Με την ολοκλήρωση των εργαστηριακών ασκήσεων , πήραμε αρκέτες και βασικές γνώσεις για την Αρχιτεκτονική των Υπολογιστών , την κατασκευή επεξεργαστή με βάση τη καλύτερη απόδοση και χαμηλότερου κόστους , μία καλη και ενδιαφέρουσα αρχή γενικά για την ενοσχόληση πάνω σ' αυτό το αντικείμενο.
 
 Πηγές : 
-[McPAT 1.0: An Integrated Power, Area, and Timing Modeling Framework forMulticore Architectures](McPAT 1.0: An Integrated Power, Area, and Timing Modeling Framework forMulticore Architectures)
+
+[McPAT 1.0: An Integrated Power, Area, and Timing Modeling Framework forMulticore Architectures](https://pdfs.semanticscholar.org/dbb3/f7142c95631a347222950099aeb4661f8d5c.pdf?fbclid=IwAR3PiSGEteG_Euqkfev_kz6ek9JOrnqyM9YpOZSTGP2vngKz3OPhenClg_4)
 
 [McPAT: An Integrated Power, Area, and Timing ModelingFramework for Multicore and Manycore Architectures](https://www.hpl.hp.com/research/mcpat/micro09.pdf?fbclid=IwAR2UIIsvFdRrUTNw7DuDn-6zD_A_W40Hy1MN2E-AT1DvfqVuKvCiqdFxzAI)
 
